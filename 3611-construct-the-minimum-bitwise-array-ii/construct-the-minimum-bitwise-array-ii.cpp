@@ -25,4 +25,3 @@ public:
         return res;
     }
 };
-//t.c->O(n)
