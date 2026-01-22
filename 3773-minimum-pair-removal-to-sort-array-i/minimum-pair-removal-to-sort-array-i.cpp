@@ -1,30 +1,27 @@
-#include <vector>
-using namespace std;
-
 class Solution {
 public:
-   int minimumPairRemoval(vector<int>& nums) {
-       vector<int> arr(nums.begin(), nums.end());
-       int ops = 0;
+int minPairSum(vector<int>& nums){
+    int n=nums.size();
+    int minSum=INT_MAX;
+    int idx=-1;
 
-       while (!isSorted(arr)) {
-           int minSum = INT_MAX, idx = 0;
-           for (int i = 0; i + 1 < arr.size(); i++) {
-               if (arr[i] + arr[i+1] < minSum) {
-                   minSum = arr[i] + arr[i+1];
-                   idx = i;
-               }
-           }
-           arr[idx] = minSum;
-           arr.erase(arr.begin() + idx + 1);
-           ops++;
-       }
-       return ops;
-   }
+    for(int i=0;i<n-1;i++){
+        if(nums[i]+nums[i+1]<minSum){
+            idx=i;
+            minSum=nums[i]+nums[i+1];
+        }
+    }
+    return idx;
+}
+    int minimumPairRemoval(vector<int>& nums) {
+        int opn=0;
+        while(!is_sorted(begin(nums),end(nums))){
+            int idx=minPairSum(nums);
 
-   bool isSorted(vector<int>& arr) {
-       for (int i = 1; i < arr.size(); i++)
-           if (arr[i] < arr[i-1]) return false;
-       return true;
-   }
+            nums[idx]=nums[idx]+nums[idx+1];
+            nums.erase(begin(nums)+idx+1);
+            opn++;
+        }
+        return opn;
+    }
 };
