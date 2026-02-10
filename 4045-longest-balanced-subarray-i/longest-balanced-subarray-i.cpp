@@ -2,7 +2,7 @@ class Solution {
 public:
     int longestBalanced(vector<int>& nums) {
         int n=nums.size();
-        int res=0;
+        int ans=0;
         for(int i=0;i<n;i++){
             unordered_set<int>even;
             unordered_set<int>odd;
@@ -12,9 +12,9 @@ public:
                 else 
                     odd.insert(nums[j]);
                 if(even.size()==odd.size()) 
-                  res=max(res,j-i+1);
+                  ans=max(ans,j-i+1);
             }
         }
-        return res;
+        return ans;
     }
 };
