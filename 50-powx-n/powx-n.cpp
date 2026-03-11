@@ -7,6 +7,6 @@ public:
         return x*solve(x*x,(n-1)/2);
     }
     double myPow(double x, int n) {
-        return solve(x,(long)n);
+        return solve(x,n);
     }
 };
