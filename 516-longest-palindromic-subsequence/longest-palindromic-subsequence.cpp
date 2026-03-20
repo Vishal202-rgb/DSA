@@ -16,6 +16,6 @@ public:
         m=s.length();
         memset(t,-1,sizeof(t));
 
-        return solve(s,0,m-1);
+        return solve(s,0,m);
     }
 };
