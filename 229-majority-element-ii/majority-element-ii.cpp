@@ -6,7 +6,7 @@ public:
         int target = floor(n/3);
         unordered_map<int, int> mp;
 
-        for(int it:nums){
+        for(auto it:nums){
             mp[it]++;
         }
         for(auto it: mp){
