@@ -1,15 +1,15 @@
 class Solution {
 public:
     int reverse(int n){
-        int r=0;
-        while(n){
+        int rem=0;
+        while(n>0){
             int d=n%10;
-            r=r*10+d;
+            rem=rem*10+d;
             n/=10;
         }
-        return r;
+        return rem;
     }
     int mirrorDistance(int n) {
-        return  abs(n - reverse(n));
+        return abs(n-reverse(n));
     }
 };
