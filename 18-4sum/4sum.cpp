@@ -18,12 +18,14 @@ public:
                         p++;
                     }else if(sum>tar){
                         q--;
-                    }else{
-                        vector<int>temp={nums[i],nums[j],nums[p],nums[q]};
-                        ans.push_back(temp);
-                        p++,q--;
-                    while(p<q && nums[p]==nums[p-1])  p++;
-                    }
+                    }else {
+    vector<int> temp = {nums[i], nums[j], nums[p], nums[q]};
+    ans.push_back(temp);
+    p++, q--;
+
+    while (p < q && nums[p] == nums[p-1]) p++;
+    while (p < q && nums[q] == nums[q+1]) q--;
+}
                 }
                 j++;
                 while(j<n && nums[j]==nums[j-1]) j++;
