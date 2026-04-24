@@ -1,21 +1,19 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-        int n=s.size();
+        int n=s.length();
         unordered_set<char>st;
-        int ans=0;
+        int res=0;
 
         for(char &ch:s){
             if(st.count(ch)){
-                ans+=2;
+                res+=2;
                 st.erase(ch);
             }else{
                 st.insert(ch);
             }
         }
-        if(!st.empty()){
-            ans++;
-        }
-        return ans;
+        if(!st.empty()) res++;
+        return res;
     }
 };
