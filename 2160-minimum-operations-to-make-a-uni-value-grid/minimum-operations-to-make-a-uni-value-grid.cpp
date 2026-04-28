@@ -11,7 +11,8 @@ public:
             }
         }
         int L=vec.size();
-        sort(begin(vec),end(vec));
+        //sort(begin(vec),end(vec));
+        nth_element(begin(vec),begin(vec)+L/2,end(vec));
         int tar=vec[L/2];
         int ans=0;
 
