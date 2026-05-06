@@ -1,24 +1,23 @@
 class Solution {
 public:
     vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
-        int ROWS = box.size();
-        int COLS = box[0].size();
-        vector<vector<char>> res(COLS, vector<char>(ROWS, '.'));
+        int m = box.size();
+        int n = box[0].size();
+        vector<vector<char>> ans(n, vector<char>(m, '.'));
         
-        for (int r = 0; r < ROWS; r++) {
-            int i = COLS - 1;
-            for (int c = COLS - 1; c >= 0; c--) {
+        for (int r = 0; r < m; r++) {
+            int i = n - 1;
+            for (int c = n - 1; c >= 0; c--) {
                 if (box[r][c] == '#') {
-                    res[i][ROWS - r - 1] = '#';
+                    ans[i][m - r - 1] = '#';
                     i--;
                 }
                 else if (box[r][c] == '*') {
-                    res[c][ROWS - r - 1] = '*';
+                    ans[c][m - r - 1] = '*';
                     i = c - 1;
                 }
             }
-        }
-        
-        return res;
+        } 
+        return ans;
     }
 };
