@@ -1,24 +1,23 @@
 class Solution {
 public:
     int alternateDigitSum(int n) {
-        vector<int> ans;
-        int sum1=0;
-        int sum2=0;
+        vector<int>ans;
+        int s1=0,s2=0;
+
         while(n>0){
-            int fd=n%10;
-            ans.push_back(fd);
-            n=n/10;
+            int a=n%10;
+            ans.push_back(a);
+            n/=10;
         }
-        reverse(ans.begin(), ans.end());
+        reverse(ans.begin(),ans.end());
         for(int i=0;i<ans.size();i++){
             if(i%2==0){
-                sum1+=ans[i];
-            }
-            else{
-                sum2+=ans[i];
+                s1+=ans[i];
+            }else{
+                s2+=ans[i];
             }
         }
-        int sum=sum1-sum2;
-    return sum;
+        int sum=s1-s2;
+        return sum;
     }
 };
