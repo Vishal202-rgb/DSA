@@ -5,6 +5,7 @@ public:
         sort(begin(ranges),end(ranges));
 
         for(auto &it:ranges){
+            if(it[0]>left) return false;
             if(it[0]<=left && it[1]>=right) return true;
             else if(it[0]<=left && it[1]<=right) left=max(it[1]+1,left);
         }
