@@ -1,18 +1,16 @@
 class Solution {
 public:
     bool canReach(string s, int minJump, int maxJump) {
-        int n=s.size();
-        if(s[n-1]=='1') return false;
+        int n=s.length();
+        vector<int>st(n,0);
 
-        vector<int>dp(n,0);
-        dp[0]=1;
-        int reach=0;
-
-        for(int i=1;i<n;i++){
-            if(i>=minJump && dp[i-minJump]) reach++;
-            if(i>maxJump && dp[i-maxJump-1]) reach--;
-            if(reach>0 && s[i]=='0') dp[i]=1;
+        st[0]=1;
+        int cnt=0;
+        for(int j=1;j<=n-1;j++){
+            if(j-minJump>=0) cnt+=st[j-minJump];
+            if(j-maxJump-1>=0) cnt-=st[j-maxJump-1];
+            if(cnt>0 && s[j]=='0') st[j]=1;
         }
-        return dp[n-1];
+        return st[n-1]>0;
     }
 };
