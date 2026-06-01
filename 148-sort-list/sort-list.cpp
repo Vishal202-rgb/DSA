@@ -20,8 +20,8 @@
  */
 class Solution {
 public:
-    ListNode* sortList(ListNode* head) {
-        vector<int> res;
+    ListNode* sortList(ListNode* head) {  
+        vector<int>res;
         ListNode* ptr = head;
         while (ptr != NULL) {
             res.push_back(ptr->val);
