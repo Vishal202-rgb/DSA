@@ -6,7 +6,6 @@ public:
             res.push_back(temp);
             return;
         }
-        //take 0th element
         temp.push_back(nums[i]);
         solve(i+1,nums,temp);
         temp.pop_back();
