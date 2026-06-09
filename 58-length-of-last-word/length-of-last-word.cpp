@@ -4,15 +4,12 @@ public:
         int n=s.length();
         int i=n-1;
 
-        while(i>=0 && s[i]==' ') {
-            i--;
-        }
-
-        int length=0;
+        while(i>=0 && s[i]==' ') i--;
+        int l=0;
         while(i>=0 && s[i]!=' '){
             i--;
-            length++;
+            l++;
         }
-        return length;
+        return l;
     }
 };
