@@ -4,9 +4,9 @@ public:
     int check(int idx,vector<int>& cost){
         if(idx>=cost.size()) return 0;
         if(t[idx]!=-1) return t[idx];
+
         int a=cost[idx]+check(idx+1,cost);
         int b=cost[idx]+check(idx+2,cost);
-
         return t[idx]=min(a,b);
     }
     int minCostClimbingStairs(vector<int>& cost) {
