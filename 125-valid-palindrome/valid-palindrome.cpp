@@ -2,9 +2,9 @@ class Solution {
 public:
     bool isPalindrome(string s) {
         string filtered;
-        for (char c : s) {
-            if (isalnum(c)) {
-                filtered += tolower(c);
+        for (char &ch:s) {
+            if (isalnum(ch)) {
+                filtered += tolower(ch);
             }
         }
         int left = 0;
