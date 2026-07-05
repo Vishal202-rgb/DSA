@@ -2,7 +2,7 @@ class Solution {
 public:
     int totalNumbers(vector<int>& digits) {
         int n=digits.size();
-        unordered_set<int>it;
+        unordered_set<int>mp;
 
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
@@ -11,13 +11,13 @@ public:
                         if(digits[i]!=0){
                             if(digits[k]%2==0){
                                 int nums=digits[i]*100+digits[j]*10+digits[k];
-                                it.insert(nums);
+                                mp.insert(nums);
                             }
                         }
                     }
                 }
             }
         }
-        return it.size();
+        return mp.size();
     }
 };
