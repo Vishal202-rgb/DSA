@@ -2,16 +2,16 @@ class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
         int n=nums.size();
-        vector<int>res(n+1,0);
-        int duplicate=0,missing=0;
+        vector<int>ans(n+1);
+        int dup=0,miss=0;
 
         for(int i=0;i<n;i++){
-            res[nums[i]]++;
+            ans[nums[i]]++;
         }
-        for(int i=1;i<res.size();i++){
-            if(res[i]==0) missing=i;
-            if(res[i]==2) duplicate=i;
+        for(int i=1;i<ans.size();i++){
+            if(ans[i]==0) miss=i;
+            if(ans[i]==2) dup=i;
         }
-        return {duplicate,missing};
+        return {dup,miss};
     }
 };
