@@ -1,7 +1,7 @@
 class Solution {
 public:
     int removeCoveredIntervals(vector<vector<int>>& intervals) {
-        vector<vector<int>>ans;
+        // vector<vector<int>>ans;
         int n=intervals.size();
 
 
@@ -13,16 +13,26 @@ public:
         };
         sort(begin(intervals),end(intervals),lambda);
 
-        ans.push_back(intervals[0]);
+        // ans.push_back(intervals[0]);
+        int lastInterval=intervals[0][1];
+        int cnt=1;
+
         for(int i=1;i<n;i++){
+            // Approach-1
             // if(ans.back()[0]<=intervals[i][0] && ans.back()[1]>=intervals[i][1]){
             //     continue; ye condition pehla hamesa redundant hoga hi
             // }
-             if(ans.back()[1]>=intervals[i][1]){
+            //Approach-2
+            //  if(ans.back()[1]>=intervals[i][1]){
+            //     continue;
+            // }
+            //Approach-3
+             if(lastInterval>=intervals[i][1]){
                 continue;
-            }
-            ans.push_back(intervals[i]);
+             }
+            lastInterval=intervals[i][1];
+            cnt++;
         }
-        return ans.size();
+        return cnt;
     }
 };
