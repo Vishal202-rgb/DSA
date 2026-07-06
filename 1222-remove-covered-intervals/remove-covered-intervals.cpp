@@ -15,7 +15,10 @@ public:
 
         ans.push_back(intervals[0]);
         for(int i=1;i<n;i++){
-            if(ans.back()[0]<=intervals[i][0] && ans.back()[1]>=intervals[i][1]){
+            // if(ans.back()[0]<=intervals[i][0] && ans.back()[1]>=intervals[i][1]){
+            //     continue; ye condition pehla hamesa redundant hoga hi
+            // }
+             if(ans.back()[1]>=intervals[i][1]){
                 continue;
             }
             ans.push_back(intervals[i]);
