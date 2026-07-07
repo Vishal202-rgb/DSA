@@ -1,14 +1,19 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        if(n<=3) return n;
-        int prev1=3,prev2=2,curr=0;
+        //Approch-01 (Recursion)->they gives TLE
+        /*if(n==0 || n==1) return 1;
 
-        for(int i=3;i<n;i++){
-            curr=prev1+prev2;
-            prev2=prev1;
-            prev1=curr;
+        return climbStairs(n-1)+climbStairs(n-2);*/
+
+        //Approach-02 (Boottom-Up Approach)
+        if(n==0 || n==1) return 1;
+        vector<int>dp(n+1);
+        dp[0]=dp[1]=1;
+
+        for(int i=2;i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2];
         }
-        return curr;
+        return dp[n];
     }
 };
