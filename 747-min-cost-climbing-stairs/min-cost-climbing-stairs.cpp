@@ -1,17 +1,13 @@
 class Solution {
 public:
-    int t[1001];
-    int check(int idx,vector<int>& cost){
-        if(idx>=cost.size()) return 0;
-        if(t[idx]!=-1) return t[idx];
-
-        int a=cost[idx]+check(idx+1,cost);
-        int b=cost[idx]+check(idx+2,cost);
-        return t[idx]=min(a,b);
+    int mincost(vector<int>& cost,int n,vector<int>&dp){
+        if(n<=1) return 0;
+        if(dp[n]!=-1) return dp[n];
+        return dp[n]=min(mincost(cost,n-1,dp)+cost[n-1],mincost(cost,n-2,dp)+cost[n-2]);
     }
     int minCostClimbingStairs(vector<int>& cost) {
         int n=cost.size();
-        memset(t,-1,sizeof(t));
-        return min(check(0,cost),check(1,cost));
+        vector<int>dp(n+1,-1);
+        return mincost(cost,n,dp);
     }
 };
