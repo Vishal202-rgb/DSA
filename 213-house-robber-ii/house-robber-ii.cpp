@@ -1,26 +1,30 @@
 class Solution {
 public:
-int t[101];
-int solve(vector<int>& nums,int i,int n){
-    if(i>n) return 0;
-    if(t[i]!=-1) return t[i];
-
-    int steal=nums[i]+solve(nums,i+2,n);
-    int skip=solve(nums,i+1,n);
-
-    return t[i]=max(steal,skip);
-}
     int rob(vector<int>& nums) {
         int n=nums.size();
         if(n==1) return nums[0];
         if(n==2) return max(nums[0],nums[1]);
 
-        memset(t,-1,sizeof(t));
+       vector<int>dp(3,0);
+       dp[1]=nums[0];
+       dp[2]=max(nums[0],nums[1]);
 
-        int take_0th_pos=solve(nums,0,n-2);
-         memset(t,-1,sizeof(t));
-        int take_1st_pos=solve(nums,1,n-1);
+       for(int i=2;i<n-1;i++){
+       dp[0]=dp[1];
+       dp[1]=dp[2];
+       dp[2]=max(nums[i]+dp[0],dp[1]);
+       }
+       int ans=dp[2];
 
-        return max(take_0th_pos,take_1st_pos);
+       dp[1]=nums[1];
+       dp[2]=max(nums[1],nums[2]);
+
+       for(int i=3;i<n;i++){
+       dp[0]=dp[1];
+       dp[1]=dp[2];
+       dp[2]=max(nums[i]+dp[0],dp[1]);
+       }
+       ans=max(ans,dp[2]);
+       return ans;
     }
 };
