@@ -1,25 +1,15 @@
 class Solution {
 public:
-    int n;
-    int t[301][5001];
-    int solve(int i,vector<int>& coins,int amount){
+    int totalWays(int n,int amount,vector<int>&coins,vector<vector<int>>&dp){
         if(amount==0) return 1;
-        if(i==n) return 0;
-        if(t[i][amount]!=-1){
-            return t[i][amount];
-        }
-        if(coins[i]>amount){
-            return t[i][amount]=solve(i+1,coins,amount);
-        }
-        int take=solve(i,coins,amount-coins[i]);
-        int skip=solve(i+1,coins,amount);
+        if(n==0 || amount<0) return 0;
+        if(dp[n][amount]!=-1) return dp[n][amount];
 
-        return t[i][amount]={take+skip};
+        return dp[n][amount]=totalWays(n-1,amount,coins,dp)+totalWays(n,amount-coins[n-1],coins,dp);
     }
     int change(int amount, vector<int>& coins) {
-        n=coins.size();
-        memset(t,-1,sizeof(t));
-
-        return solve(0,coins,amount);
+        int n=coins.size();
+        vector<vector<int>>dp(n+1,vector<int>(amount+1,-1));
+        return totalWays(n,amount,coins,dp);
     }
 };
