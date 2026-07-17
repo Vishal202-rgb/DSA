@@ -1,29 +1,17 @@
 class Solution {
 public:
-    int n;
-    int dp[13][10001];
-    const int INF = 1e9;
-    int solve(int i, vector<int>& coins, int amount) {
-        if (amount == 0)
-            return 0;
+    int findMinCoin(int n,int amount,vector<int>& coins,vector<vector<int>>&dp){
+        if(amount==0) return 0;
+        if(n==0 || amount<0) return 1e9;
+        if(dp[n][amount]!=-1) return dp[n][amount];
 
-        if (i == n || amount < 0)
-            return INF;
-
-        if (dp[i][amount] != -1)
-            return dp[i][amount];
-
-        int take = INF;
-        if (coins[i] <= amount)
-            take = 1 + solve(i, coins, amount - coins[i]);
-
-        int skip = solve(i + 1, coins, amount);
-        return dp[i][amount] = min(take, skip);
+        return dp[n][amount]=min(findMinCoin(n-1,amount,coins,dp),1+findMinCoin(n,amount-coins[n-1],coins,dp));
     }
     int coinChange(vector<int>& coins, int amount) {
-        n = coins.size();
-        memset(dp, -1, sizeof(dp));
-        int ans = solve(0, coins, amount);
-        return (ans == INF) ? -1 : ans;
+        int n=coins.size();
+        vector<vector<int>>dp(n+1,vector<int>(amount+1,-1));
+        int ans=findMinCoin(n,amount,coins,dp);
+
+        return ans>=1e9 ? -1 : ans;
     }
 };
