@@ -8,6 +8,7 @@ public:
         if(k<=mid){
             return kthGrammar(n-1,k);
         }
-         return 1-kthGrammar(n-1,k-mid);
+         return !kthGrammar(n-1,k-mid);
+         //return !kthGrammar(n-1,k-mid);
     }
 };
