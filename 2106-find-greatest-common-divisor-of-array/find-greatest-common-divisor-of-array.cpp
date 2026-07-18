@@ -1,13 +1,9 @@
 class Solution {
 public:
     int findGCD(vector<int>& nums) {
-        int minimum = nums[0];
-        int maximum = nums[0];
+    int mn = *min_element(nums.begin(), nums.end());
+    int mx = *max_element(nums.begin(), nums.end());
 
-    for (int x : nums) {
-        minimum = min(minimum, x);
-        maximum = max(maximum, x);
-    }
-    return __gcd(minimum,maximum);
+    return gcd(mn, mx);
     }
 };
