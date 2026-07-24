@@ -1,36 +1,56 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& mat) {
-       int m=mat.size(),n=mat[0].size();
-       int srow=0,scol=0,erow=m-1,ecol=n-1;
-       //for storing the value
-        vector<int>res;
+        int m=mat.size(),n=mat[0].size();
+        int dir=0;
 
-       while(srow<=erow && scol<=ecol){
-        //top
-        for(int j=scol;j<=ecol;j++){
-            res.push_back(mat[srow][j]);
-        }
-        //right
-        for(int i=srow+1;i<=erow;i++){
-            res.push_back(mat[i][ecol]);
-        }
-        //bottom
-        for(int j=ecol-1;j>=scol;j--){
-            if(srow==erow){
-                break;
+        int top = 0;
+        int down = m - 1;
+        int left = 0;
+        int right = n - 1;
+        /*
+        0->left to right
+        1->top to bottom
+        2->right to left
+        3->bottom to top
+        */
+        vector<int>ans;
+
+        while(top <= down && left <= right){
+            if(dir==0){
+                //left to right
+                //const:row(top)
+                for(int i=left;i<=right;i++){
+                    ans.push_back(mat[top][i]);
+                }
+                top++;
             }
-            res.push_back(mat[erow][j]);
-        }
-        //left
-        for(int i=erow-1;i>=srow+1;i--){
-            if(scol==ecol){
-                break;
+            if(dir==1){
+                //top to bottom
+                //const:col(right)
+                for(int i=top;i<=down;i++){
+                    ans.push_back(mat[i][right]);
+                }
+                right--;
             }
-            res.push_back(mat[i][scol]);
+            if(dir==2){
+                //right to left
+                //const:row(down)
+                for(int i=right;i>=left;i--){
+                    ans.push_back(mat[down][i]);
+                }
+                down--;
+            }
+            if(dir==3){
+                //bottom to top
+                //const:col(left)
+                for(int i=down;i>=top;i--){
+                    ans.push_back(mat[i][left]);
+                }
+                left++;
+            }
+            dir = (dir+1)%4;
         }
-        srow++,erow--,scol++,ecol--;
-       }
-       return res;
+        return ans;
     }
 };
