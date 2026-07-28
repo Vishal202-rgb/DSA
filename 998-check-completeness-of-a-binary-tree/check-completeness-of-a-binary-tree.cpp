@@ -1,10 +1,11 @@
 class Solution {
 public:
     bool isCompleteTree(TreeNode* root) {
+        //BFS 
         queue<TreeNode*> que;
         que.push(root);
         
-        bool past = false; //kya aapne past me NULL node dekha hai ?
+        bool past = false;
         
         while(!que.empty()) {
             TreeNode* node = que.front();
@@ -16,7 +17,6 @@ public:
                 if(past == true) {
                     return false;
                 }
-                
                 que.push(node->left);
                 que.push(node->right);
             }
