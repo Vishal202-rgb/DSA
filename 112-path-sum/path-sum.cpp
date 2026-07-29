@@ -11,12 +11,22 @@
  */
 class Solution {
 public:
-    bool hasPathSum(TreeNode* root, int targetSum) {
+    bool inOrder(TreeNode* root,int sum,int &targetSum){
         if(!root) return false;
-        if(!root->left && !root->right){
-            return targetSum-root->val==0;
+
+        sum+=root->val;
+        if(root->left==NULL && root->right==NULL){
+            if(sum==targetSum) return true;
+            return false;
         }
-        targetSum-=root->val;
-        return hasPathSum(root->left,targetSum)||hasPathSum(root->right,targetSum);
+        bool leftSide=inOrder(root->left,sum,targetSum);
+        bool rightSide=inOrder(root->right,sum,targetSum);
+
+        return leftSide || rightSide;
+    }
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        int sum=0;
+        bool res=inOrder(root,sum,targetSum);
+        return res;
     }
 };
