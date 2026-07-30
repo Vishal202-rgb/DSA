@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minimumPushes(string word) {
-        int res=0;
+        int ans=0;
         vector<int>mp(26,0);
 
         for(char &ch:word){
@@ -11,8 +11,8 @@ public:
         for(int i=0;i<26;i++){
             int freq=mp[i];
             int press=(i/8+1);
-            res+=press*freq;
+            ans+=press*freq;
         }
-        return res;
+        return ans;
     }
 };
