@@ -1,19 +1,18 @@
 class Solution {
 public:
     int minimumPushes(string word) {
-        int ans=0;
-        //using map
-        unordered_map<int,int>mp;
+        int res=0;
+        vector<int>mp(26,0);
 
-        int st=2;
         for(char &ch:word){
-            if(st>9){
-                st=2;
-            }
-            mp[st]++;
-            ans+=mp[st];
-            st++;
+            mp[ch-'a']++;
         }
-        return ans;
+        sort(begin(mp),end(mp),greater<int>());
+        for(int i=0;i<26;i++){
+            int freq=mp[i];
+            int press=(i/8+1);
+            res+=press*freq;
+        }
+        return res;
     }
 };
