@@ -1,53 +1,34 @@
 class Solution {
 public:
-    int n;
-    int t[1001][1001];
-    
-    bool predecessor(string& prev, string& curr) {
-        int M = prev.length();
-        int N = curr.length();
-        
-        if(M >= N || N-M != 1)
-            return false;
-        
-        int i = 0, j = 0;
-        while(i < M && j < N) {
-            if(prev[i] == curr[j]) {
-                i++;
-            }
-            j++;
+    static bool comp(string w1,string w2){
+        return w1.size()<w2.size();
+    }
+    bool isPredecessor(string w1,string w2){
+        if(w1.size()+1!=w2.size()) return 0;
+        int i=w1.size()-1,j=w2.size()-1;
+
+        while(i>=0 && j>=0){
+            if(w1[i]==w2[j]){
+                i--;
+                j--;
+            }else
+                j--;
         }
-        return i==M;
+        return i<0;
     }
-    
-    int lis(vector<string>& words, int prev_idx, int curr_idx) {
-       if(curr_idx == n)
-           return 0;
-        
-        if(prev_idx != -1 && t[prev_idx][curr_idx] != -1)
-            return t[prev_idx][curr_idx];
-        
-        int taken = 0;
-        if(prev_idx == -1 || predecessor(words[prev_idx], words[curr_idx]))
-            taken = 1 + lis(words, curr_idx, curr_idx+1);
-        
-        int not_taken = lis(words, prev_idx, curr_idx+1);
-        
-        if(prev_idx != -1)
-            t[prev_idx][curr_idx] =  max(taken, not_taken);
-        
-        return max(taken, not_taken);
-            
-    }
-    
-    static bool myFunction(string& s1, string& s2) {
-        return s1.length() < s2.length();
-    }
-    
     int longestStrChain(vector<string>& words) {
-        memset(t, -1, sizeof(t));
-        n = words.size();
-        sort(begin(words), end(words), myFunction); //You can select pairs in any order.
-        return lis(words, -1, 0);
+        int n=words.size();
+        sort(begin(words),end(words),comp);
+        vector<int>LCS(n,1);
+        int maxLen=1;
+
+        for(int i=1;i<n;i++){
+            for(int j=i-1;j>=0;j--){
+                if(isPredecessor(words[j],words[i]))
+                LCS[i]=max(LCS[i],1+LCS[j]);
+            }
+            maxLen=max(maxLen,LCS[i]);
+        }
+        return maxLen;
     }
 };
