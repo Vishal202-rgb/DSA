@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-int maxSum;
+    int maxSum;
     int solve(TreeNode* root){
         if(!root) return 0;
         int l=solve(root->left);
