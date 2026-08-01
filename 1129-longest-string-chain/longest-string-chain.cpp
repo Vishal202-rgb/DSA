@@ -3,31 +3,20 @@ public:
     static bool comp(string w1,string w2){
         return w1.size()<w2.size();
     }
-    bool isPredecessor(string w1,string w2){
-        if(w1.size()+1!=w2.size()) return 0;
-        int i=w1.size()-1,j=w2.size()-1;
-
-        while(i>=0 && j>=0){
-            if(w1[i]==w2[j]){
-                i--;
-                j--;
-            }else
-                j--;
-        }
-        return i<0;
-    }
     int longestStrChain(vector<string>& words) {
-        int n=words.size();
         sort(begin(words),end(words),comp);
-        vector<int>LCS(n,1);
+        unordered_map<string,int>dp;
         int maxLen=1;
 
-        for(int i=1;i<n;i++){
-            for(int j=i-1;j>=0;j--){
-                if(isPredecessor(words[j],words[i]))
-                LCS[i]=max(LCS[i],1+LCS[j]);
+        for(auto &w:words){
+            dp[w]=1;
+            for(int i=0;i<w.size();i++){
+                string str=w.substr(0,i)+w.substr(i+1);
+                if(dp.count(str)){
+                    dp[w]=max(dp[w],1+dp[str]);
+                }
             }
-            maxLen=max(maxLen,LCS[i]);
+            maxLen=max(maxLen,dp[w]);
         }
         return maxLen;
     }
