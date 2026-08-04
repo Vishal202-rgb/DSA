@@ -1,26 +1,23 @@
 class Solution {
 public:
-    int t[1001][1001];
-    bool check(string &s,int i,int j){
-        if(i>j) return true;
-        if(t[i][j]!=-1){
-            return t[i][j];
-        }
-        if(s[i]==s[j]) return t[i][j]=check(s,i+1,j-1);
-        return t[i][j]= false;
-    }
     int countSubstrings(string s) {
-        int n=s.length();
-        int count=0;
-        memset(t,-1,sizeof(t));
+        int n=s.size();
+        vector<vector<bool>>dp(n,vector<bool>(n,0));
 
-        for(int i=0;i<n;i++){
-            for(int j=i;j<n;j++){
-                if(check(s,i,j)) 
-                    count++;
+        //diagonal ke liye
+        for(int i=0;i<n;i++)
+        dp[i][i]=1;
+
+        int totalPallindrome=0;
+        for(int len=2;len<=n;len++){
+            for(int i=0;i<=n-len;i++){
+                int j=i+len-1;
+                if(s[i]==s[j]&&(len==2||dp[i+1][j-1])){
+                    dp[i][j]=1;
+                    totalPallindrome++;
+                }
             }
         }
-        return count;
+        return totalPallindrome+s.size();
     }
 };
-//Time complexity-O(n*2)
