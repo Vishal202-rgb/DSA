@@ -11,27 +11,16 @@
  */
 class Solution {
 public:
+    void solve(TreeNode* root,vector<int>&ans){
+        if(root!=nullptr){
+        solve(root->left,ans);
+        ans.push_back(root->val);
+        solve(root->right,ans);
+        }
+    }
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int>ans;
-        //morris traversal
-        TreeNode* curr=root;
-
-        while(curr!=NULL){
-            if(curr->left==NULL){
-                ans.push_back(curr->val);
-                curr=curr->right;
-            }
-            else{
-                TreeNode * leftChild=curr->left;
-                while(leftChild->right!=NULL){
-                    leftChild=leftChild->right;
-                }
-                leftChild->right=curr;
-                TreeNode* temp=curr;
-                curr=curr->left;
-                temp->left=NULL;  
-            }
-        }
+        solve(root,ans);
         return ans;
     }
 };
