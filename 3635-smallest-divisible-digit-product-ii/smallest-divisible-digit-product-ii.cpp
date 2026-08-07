@@ -1,71 +1,79 @@
 class Solution {
 public:
-    typedef long long ll;
-    string freeSlotsFiller(ll required, int length) {
-        string str;
+    using ll = long long;
 
-        for(int digit = 9; digit >= 2; digit--) {
-            while(required % digit == 0) {
-                str.push_back(digit + '0');
-                required /= digit;
+    string buildSmallestString(ll targetFactor, int slots) {
+        string result;
+
+        for (int value = 9; value >= 2; value--) {
+            while (targetFactor % value == 0) {
+                result.push_back(char(value + '0'));
+                targetFactor /= value;
             }
         }
 
-        while(str.length() < length) {
-            str.push_back('1');
+        while (result.size() < slots) {
+            result.push_back('1');
         }
 
-        reverse(begin(str), end(str));
-
-        return str;
+        reverse(result.begin(), result.end());
+        return result;
     }
 
-    string smallestNumber(string num, long long t) {
-        int n = num.length();
+    string smallestNumber(string number, long long target) {
+        int length = number.size();
 
-        ll temp = t;
-        for(int primeFact : {2, 3, 5, 7}) {
-            while(temp % primeFact == 0) {
-                temp /= primeFact;
+        ll checkFactor = target;
+
+        for (int prime : {2, 3, 5, 7}) {
+            while (checkFactor % prime == 0) {
+                checkFactor /= prime;
             }
         }
 
-        if(temp != 1) {
+        if (checkFactor != 1) {
             return "-1";
         }
-        vector<ll> remainingFactor(n+1, t);
-        for(int i = 0; i < n; i++) {
-            int digit = num[i] - '0';
 
-            if(digit == 0) {
+        vector<ll> factorNeeded(length + 1, target);
+
+        for (int idx = 0; idx < length; idx++) {
+            int currentDigit = number[idx] - '0';
+
+            if (currentDigit == 0) {
                 break;
             }
-            remainingFactor[i+1] = remainingFactor[i]/gcd(remainingFactor[i], (ll)digit);
+
+            factorNeeded[idx + 1] =
+                factorNeeded[idx] / gcd(factorNeeded[idx], (ll)currentDigit);
         }
 
-        if(remainingFactor[n] == 1) {
-            return num;
+        if (factorNeeded[length] == 1) {
+            return number;
         }
 
-        int zeroPos = num.find('0');
-        int zeroIdx = n-1;
-        if(zeroPos != -1) {
-            zeroIdx = zeroPos;
+        int firstZero = number.find('0');
+        int startIndex = length - 1;
+
+        if (firstZero != -1) {
+            startIndex = firstZero;
         }
 
-        for(int i = zeroIdx; i >= 0; i--) {
-            ll required = remainingFactor[i];
-            int freeSlots = n - 1 - i;
+        for (int pos = startIndex; pos >= 0; pos--) {
+            ll currentNeed = factorNeeded[pos];
+            int remainingSlots = length - pos - 1;
 
-            for(int digit = (num[i] - '0')+1; digit <= 9; digit++) {
-                ll furtherRequired = required / gcd(required, digit);
-                string requiredNumber = freeSlotsFiller(furtherRequired, freeSlots);
+            for (int nextDigit = (number[pos] - '0') + 1; nextDigit <= 9; nextDigit++) {
+                ll updatedNeed = currentNeed / gcd(currentNeed, (ll)nextDigit);
 
-                if(requiredNumber.length() == freeSlots) {
-                    return num.substr(0, i) + char(digit + '0') + requiredNumber;
+                string suffix = buildSmallestString(updatedNeed, remainingSlots);
+
+                if (suffix.size() == remainingSlots) {
+                    return number.substr(0, pos) + char(nextDigit + '0') + suffix;
                 }
             }
         }
-        return freeSlotsFiller(t, n+1);
+
+        return buildSmallestString(target, length + 1);
     }
 };
