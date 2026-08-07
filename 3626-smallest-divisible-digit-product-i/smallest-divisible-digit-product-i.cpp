@@ -1,19 +1,17 @@
 class Solution {
 public:
-    int smallestNumber(int n, int t) {
-        int num=n;
-        while(true){
-            int prod=1;
-            n=num;
-
-            while(n){
-                prod*=n%10;
-                n/=10;
-            }
-            if(prod%t==0) break;
-            else
-                num++;
+    int findDigit(int num){
+        int prod=1;
+        while(num){
+            prod*=(num%10);
+            num/=10;
         }
-        return num;
+        return prod;
+    }
+    int smallestNumber(int n, int t) {
+        for(int num=n;num<=n+10;num++){
+            if(findDigit(num)%t==0) return num;
+        }
+        return -1;
     }
 };
