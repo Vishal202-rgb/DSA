@@ -1,15 +1,11 @@
 class Solution {
-public:    
+public:
     int countEven(int num) {
-        int ans =num;
-        int sum=0;
-        while(ans>0){
-            sum+=ans%10;
-            ans/=10;
+        int digit=0,n=num;
+        while(n){
+            digit+=(n%10);
+            n/=10;
         }
-    if(sum%2==0){
-        return num/2;
-    }
-    return (num-1)/2 ;
+        return digit%2?(num-1)/2:num/2;
     }
 };
