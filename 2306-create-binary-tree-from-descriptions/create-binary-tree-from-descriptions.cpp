@@ -15,10 +15,10 @@ public:
         unordered_map<int,TreeNode*>nodes;
         unordered_set<int>children;
 
-        for(auto &d:descriptions){
-            int p=d[0];
-            int c=d[1];
-            int l=d[2];
+        for(auto &vec:descriptions){
+            int p=vec[0];
+            int c=vec[1];
+            int l=vec[2];
 
             if(!nodes.count(p)) nodes[p]=new TreeNode(p);
             if(!nodes.count(c)) nodes[c]=new TreeNode(c);
