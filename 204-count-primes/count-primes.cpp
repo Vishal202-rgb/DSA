@@ -1,18 +1,18 @@
 class Solution {
 public:
     int countPrimes(int n) {
-        int res=0;
-        vector<bool>p(n+1,true);
-        p[0]=p[1]=false;
+        if(n<=2) return 0;
+        vector<bool>visited(n,0);
+        int cnt=0;
 
         for(int i=2;i<n;i++){
-            if(p[i]){
-                res++;
-            }
-            for(int j=2*i;j<n;j+=i){
-                p[j]=0;
+            if(!visited[i]){
+                cnt++;
+            for(long long j=1LL*i*i;j<n;j+=i){
+                visited[j]=1;
+             }
             }
         }
-        return res;
+        return cnt;
     }
 };
