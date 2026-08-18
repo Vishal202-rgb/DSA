@@ -14,6 +14,7 @@ public:
             tar+=x;
         }
         if(tar%2!=0) return false;
+        
         vector<vector<int>>dp(n+1,vector<int>(tar/2+1,-1));
         return findSubset(n,tar/2,nums,dp);
     }
