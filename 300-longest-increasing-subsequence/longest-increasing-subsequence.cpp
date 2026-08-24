@@ -1,6 +1,7 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
+        //binary search approach
         int n=nums.size();
         vector<int>ans(1,nums[0]);
 
