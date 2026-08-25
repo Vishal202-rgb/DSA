@@ -4,6 +4,7 @@ public:
         if(target==0) return 1;
         if(target<0) return 0;
         if(dp[target]!=-1) return dp[target];
+        
         int ans=0;
         for(int j=0;j<n;j++){
             ans+=findTotalComb(n,target-nums[j],nums,dp);
