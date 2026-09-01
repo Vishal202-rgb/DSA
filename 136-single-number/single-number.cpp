@@ -1,12 +1,11 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        int n=nums.size();
-        sort(begin(nums),end(nums));
+        int res=0;
 
-        for(int i=1;i<n;i+=2){
-            if(nums[i]!=nums[i-1]) return nums[i-1];
+        for(int &x:nums){
+            res^=x;
         }
-        return nums[n-1];
+        return res;
     }
 };
