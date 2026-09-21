@@ -3,7 +3,6 @@ public:
     int countSubstrings(string s) {
         int n=s.size();
         vector<vector<bool>>dp(n,vector<bool>(n,0));
-
         //diagonal ke liye
         for(int i=0;i<n;i++)
         dp[i][i]=1;
