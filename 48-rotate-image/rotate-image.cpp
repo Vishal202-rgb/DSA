@@ -10,7 +10,7 @@ public:
             }
         }
         for(int i=0;i<m;i++){
-            reverse(begin(matrix[i]),end(matrix[i])); 
+            reverse(begin(matrix[i]),end(matrix[i]));
         }
     }
 };
