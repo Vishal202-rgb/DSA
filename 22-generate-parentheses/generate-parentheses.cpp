@@ -17,7 +17,7 @@ public:
             curr.pop_back();
         }
     }
-    vector<string> generateParenthesis(int n) {
+    vector<string>generateParenthesis(int n) {
         string curr="";
         solve(n,curr,0,0);
         return res;
