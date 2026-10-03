@@ -7,7 +7,7 @@ public:
         int tar=floor(n/3);
 
         for(auto &it:nums)
-        mp[it]++;
+            mp[it]++;
 
         for(auto &it:mp){
             if(it.second>tar) res.push_back(it.first);
