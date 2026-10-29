@@ -3,17 +3,17 @@ public:
     int longestPalindrome(string s) {
         int n=s.length();
         unordered_set<char>st;
-        int res=0;
+        int ans=0;
 
         for(char &ch:s){
             if(st.count(ch)){
-                res+=2;
+                ans+=2;
                 st.erase(ch);
             }else{
                 st.insert(ch);
             }
         }
-        if(!st.empty()) res++;
-        return res;
+        if(!st.empty()) ans++;
+        return ans;
     }
 };
