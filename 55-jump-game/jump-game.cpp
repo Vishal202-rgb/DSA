@@ -2,15 +2,11 @@ class Solution {
 public:
     int t[10001];
     bool solve(vector<int>& nums,int n,int idx){
-        if(idx==n-1)
-            return true;
-    
-        if(t[idx]!=-1)
-            return t[idx];
-        
+        if(idx==n-1) return true;
+        if(t[idx]!=-1) return t[idx];
         for(int i=1;i<=nums[idx];i++){
-            if(solve(nums,n,idx+i)==true)
-                return t[idx]= true;
+            if(solve(nums,n,idx+i)==true) 
+                return t[idx]=true;
         }
         return t[idx]=false;
     }
