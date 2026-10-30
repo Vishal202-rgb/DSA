@@ -5,11 +5,12 @@ public:
         int lp=0,rp=height.size()-1;
 
         while(lp<rp){
-            int w=rp-lp;
+            int wt=rp-lp;
             int ht=min(height[lp],height[rp]);
-            int curr=w*ht;
+            int curr=wt*ht;
+
             maxWater=max(maxWater,curr);
-            height[lp]<height[rp] ? lp++:rp--;
+            height[lp]<height[rp]?lp++:rp--;
         }
         return maxWater;
     }
