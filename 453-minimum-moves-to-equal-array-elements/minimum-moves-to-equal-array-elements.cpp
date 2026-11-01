@@ -4,8 +4,8 @@ public:
         int n=*min_element(begin(nums),end(nums));
         int cnt=0;
 
-        for(int &num:nums){
-            cnt+=(num-n);
+        for(auto &it:nums){
+            cnt+=(it-n);
         }
         return cnt;
     }
