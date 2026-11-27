@@ -2,7 +2,6 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         int n=nums.size();
-        //normalization
         k=k%n;
         if(k==0) return;
 
